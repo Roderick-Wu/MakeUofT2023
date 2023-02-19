@@ -79,6 +79,8 @@ while True:
                 record = True
                 break
             print("waiting signal")
+            xin = 0
+            yin = 0
             time.sleep(0.05)
         
         while record:
@@ -132,6 +134,33 @@ while True:
         armZenith2.angle = 180 - angles[1]
         elbow.angle = 180 - angles[2] + elbowT
         wrist.angle = 180 - angles[3]
+        
+        #=========================================
+        if armAzimuth.angle < 0:
+            armAzimuth.angle = 0
+        elif armAzimuth.angle > 180:
+            armAzimuth.angle = 180
+            
+        if armZenith1.angle < 0:
+            armZenith1.angle = 0
+        elif armZenith1.angle > 180:
+            armZenith1.angle = 180
+            
+        if armZenith2.angle < 0:
+            armZenith2.angle = 0
+        elif armZenith2.angle > 180:
+            armZenith2.angle = 180
+            
+        if elbow.angle < 0:
+            elbow.angle = 0
+        elif elbow.angle > 180:
+            elbow.angle = 180
+            
+        if wrist.angle < 0:
+            wrist.angle = 0
+        elif wrist.angle > 180:
+            wrist.angle = 180
+        #=================================
 
         ptab = moveTo(angles, (p, t, a, b))
         angles = [ptab[0], ptab[1], ptab[2], ptab[3]]
